@@ -3,6 +3,10 @@
 Building on top of [sfmoma/getty-getter](https://github.com/sfmoma/getty-getter) to retrieve artist information from
 both Getty ULAN and WikiData.
 
+Install
+
+`pip install artist-getter`
+
 ## Getty Getter
 
 A script developed by SFMOMA for associating artists with the Getty ULAN vocabulary and gathering additional metadata
