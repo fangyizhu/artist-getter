@@ -1,5 +1,4 @@
 README.md
-pyproject.toml
 setup.py
 artist_getter/__init__.py
 artist_getter.egg-info/PKG-INFO

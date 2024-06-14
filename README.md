@@ -49,20 +49,20 @@ other artists in the ULAN vocabulary. The `object_ulan` being the ULAN of the re
 `get_getty_artist_data` which consumes an ULAN and returns entire set of data from given ulan as a dictionary.
 `get_getty_artist_data("500024301")`
 
-```yaml
-{ '@context': 'https://linked.art/ns/v1/linked-art.json',
-  '_label': 'Stieglitz, Alfred',
-  'born': { 'id': 'http://vocab.getty.edu/ulan/activity/birth/4000062133',
-            'timespan': { 'begin_of_the_begin': '1864-01-01T00:00:00',
-                          'end_of_the_end': '1864-12-31T23:59:59',
-                          'id': 'http://vocab.getty.edu/ulan/time/birth/4000062133',
-                          'type': 'TimeSpan' },
-            'took_place_at': [ { '_label': 'Hoboken',
-                                 'id': 'http://vocab.getty.edu/tgn/7013711-place',
-                                 'type': 'Place' } ],
-            'type': 'Birth' },
+```
+{
+'@context': 'https://linked.art/ns/v1/linked-art.json',
+'_label': 'Stieglitz, Alfred',
+'born': { 'id': 'http://vocab.getty.edu/ulan/activity/birth/4000062133',
+'timespan': { 'begin_of_the_begin': '1864-01-01T00:00:00',
+    'end_of_the_end': '1864-12-31T23:59:59',
+    'id': 'http://vocab.getty.edu/ulan/time/birth/4000062133',
+    'type': 'TimeSpan' },
+'took_place_at': [ { '_label': 'Hoboken',
+    'id': 'http://vocab.getty.edu/tgn/7013711-place',
+    'type': 'Place' } ],
 ...
-  ```
+```
 
 The dictionary is parsed from [this json file on ULAN](http://vocab.getty.edu/ulan/500024301.json)
 
@@ -88,7 +88,7 @@ class GetUlanView(View):
         return HttpResponse(artist_ulan, content_type="application/json")
 ```
 
-### Build
+### Build & Release
 
 For maintainers of this package only.
 
@@ -100,3 +100,6 @@ Run this command to build package:
 
 Run this if building on Windows:
 `py -m build`
+
+Run checks before releasing to PyPI:
+`twine check --strict dist/*`

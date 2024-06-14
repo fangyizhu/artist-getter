@@ -1,3 +1,2 @@
-django
 pycurl
 python-Levenshtein
