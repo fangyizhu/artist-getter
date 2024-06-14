@@ -1,4 +1,9 @@
-# Getty Getter
+# Artist Getter
+
+Building on top of [sfmoma/getty-getter](https://github.com/sfmoma/getty-getter) to retrieve artist information from
+both Getty ULAN and WikiData.
+
+## Getty Getter
 
 A script developed by SFMOMA for associating artists with the Getty ULAN vocabulary and gathering additional metadata
 based on an artist's ULAN.
@@ -45,17 +50,17 @@ other artists in the ULAN vocabulary. The `object_ulan` being the ULAN of the re
 `get_getty_artist_data("500024301")`
 
 ```yaml
-{'@context': 'https://linked.art/ns/v1/linked-art.json',
- '_label': 'Stieglitz, Alfred',
- 'born': {'id': 'http://vocab.getty.edu/ulan/activity/birth/4000062133',
-          'timespan': {'begin_of_the_begin': '1864-01-01T00:00:00',
-                       'end_of_the_end': '1864-12-31T23:59:59',
-                       'id': 'http://vocab.getty.edu/ulan/time/birth/4000062133',
-                       'type': 'TimeSpan'},
-          'took_place_at': [{'_label': 'Hoboken',
-                             'id': 'http://vocab.getty.edu/tgn/7013711-place',
-                             'type': 'Place'}],
-          'type': 'Birth'},
+{ '@context': 'https://linked.art/ns/v1/linked-art.json',
+  '_label': 'Stieglitz, Alfred',
+  'born': { 'id': 'http://vocab.getty.edu/ulan/activity/birth/4000062133',
+            'timespan': { 'begin_of_the_begin': '1864-01-01T00:00:00',
+                          'end_of_the_end': '1864-12-31T23:59:59',
+                          'id': 'http://vocab.getty.edu/ulan/time/birth/4000062133',
+                          'type': 'TimeSpan' },
+            'took_place_at': [ { '_label': 'Hoboken',
+                                 'id': 'http://vocab.getty.edu/tgn/7013711-place',
+                                 'type': 'Place' } ],
+            'type': 'Birth' },
 ...
   ```
 
@@ -75,12 +80,12 @@ from django.http import HttpResponse
 from artist_getter import *
 import json
 
+
 class GetUlanView(View):
-	def get(self, request):
+    def get(self, request):
+        artist_ulan = json.dumps(get_getty_ulan(u"Stieglitz, Alfred"))
 
-		artist_ulan = json.dumps(get_getty_ulan(u"Stieglitz, Alfred"))
-
-		return HttpResponse(artist_ulan, content_type="application/json")
+        return HttpResponse(artist_ulan, content_type="application/json")
 ```
 
 ### Build
