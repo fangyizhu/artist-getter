@@ -105,7 +105,7 @@ class GetUlanView(View):
         return HttpResponse(artist_ulan, content_type="application/json")
 ```
 
-### Build
+### Build & Release
 
 For maintainers of this package only.
 
