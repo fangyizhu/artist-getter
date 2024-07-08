@@ -106,6 +106,8 @@ For maintainers of this package only.
 Download setuptools:
 `pip install --upgrade setuptools`
 
+First, bump up the release version in setup.py.
+
 Run this command to build package:
 `python -m build`
 
@@ -114,3 +116,5 @@ Run this if building on Windows:
 
 Run checks before releasing to PyPI:
 `twine check --strict dist/*`
+
+Push everything and create a release on GitHub.

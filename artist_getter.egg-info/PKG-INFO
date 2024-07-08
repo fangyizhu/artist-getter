@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: artist_getter
-Version: 0.2
+Version: 0.2.2
 Summary: Getty ULAN and WikiData scraping utilities for artists
 Home-page: https://github.com/fangyizhu/artist-getter
 Author: Jay Mollica, Fangyi Zhu
@@ -123,6 +123,8 @@ For maintainers of this package only.
 Download setuptools:
 `pip install --upgrade setuptools`
 
+First, bump up the release version in setup.py.
+
 Run this command to build package:
 `python -m build`
 
@@ -131,3 +133,5 @@ Run this if building on Windows:
 
 Run checks before releasing to PyPI:
 `twine check --strict dist/*`
+
+Finally, push everything and create a release on github.
