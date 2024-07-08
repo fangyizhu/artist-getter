@@ -1,9 +1,10 @@
-import requests
-import urllib
 import json
-import pycurl
-from Levenshtein import distance
+import urllib
 from io import BytesIO
+
+import pycurl
+import requests
+from Levenshtein import distance
 
 
 # returns entire set of data from given ulan
@@ -17,6 +18,15 @@ def get_getty_artist_data(ulan):
 # returns artist name from given ulan
 def get_getty_artist_name(ulan):
     return get_getty_artist_data(ulan)['_label']
+
+
+# returns artist sex from given ulan
+def get_getty_artist_sex(ulan):
+    classifications = get_getty_artist_data(ulan)["classified_as"]
+    for classification in classifications:
+        if classification["_label"] in ["male", "female"]:
+            return classification["_label"]
+    return "unknown"
 
 
 # returns a list of ulans and their relationship to the provided ulan

@@ -22,5 +22,6 @@ setuptools.setup(name='artist_getter',
                  install_requires=[
                      'pycurl',
                      'python-Levenshtein',
+                     'wikidata'
                  ],
                  )

@@ -70,6 +70,13 @@ other artists in the ULAN vocabulary. The `object_ulan` being the ULAN of the re
 
 The dictionary is parsed from [this json file on ULAN](http://vocab.getty.edu/ulan/500024301.json)
 
+#### 5. get_getty_artist_sex
+
+`get_getty_artist_name` which consumes an ULAN and returns just the artist's sex as a string, available sexes are '
+male', 'female' and 'unknown'
+`get_getty_artist_name("500024301")`
+```male```
+
 ### Installation
 
 `pip install artist-getter`
