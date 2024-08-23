@@ -1,6 +1,6 @@
 import setuptools
 
-VERSION = "0.2.2"
+VERSION = "0.3"
 
 setuptools.setup(name='artist_getter',
                  version=VERSION,
