@@ -3,21 +3,29 @@
 Building on top of [sfmoma/getty-getter](https://github.com/sfmoma/getty-getter) to retrieve artist information from
 both Getty ULAN and WikiData.
 
-Install
+## Installation
 
 `pip install artist-getter`
 
-## Getty Getter
+Getty Getter was built on Django 1.8 and Python 3.12.
 
-A script developed by SFMOMA for associating artists with the Getty ULAN vocabulary and gathering additional metadata
+## Artist Getter
+
+[Getty Getter](https://github.com/sfmoma/getty-getter) was a script developed by SFMOMA for associating artists with the
+Getty ULAN vocabulary and gathering additional metadata
 based on an artist's ULAN.
 
 The ULAN vocabulary is a wealth of information regarding people and organizations involved in art and culture. More
 about ULAN can be found [here](http://www.getty.edu/research/tools/vocabularies/ulan/about.html).
 
-### Usage
+Wikidata is later added as a supplement on top of ULAN, in case there are entries missing from one of the two artist
+databases. Together they constitute Artist Getter.
 
-This script is a work in progress. Right now there are four basic functions.
+This script is a work in progress.
+
+### ULAN Functions
+
+Right now there are four basic functions.
 
 #### 1. get_getty_ulan
 
@@ -77,11 +85,10 @@ male', 'female' and 'unknown'
 `get_getty_artist_name("500024301")`
 ```male```
 
-### Installation
-
-`pip install artist-getter`
-
-Getty Getter was built on Django 1.8 and Python 3.12.
+### WikiData Functions
+#### 1. get_wiki_artist_data
+#### 2. get_wiki_artist_name
+#### 3. get_wiki_artist_sex
 
 ### Example View
 

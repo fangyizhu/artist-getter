@@ -5,6 +5,7 @@ from io import BytesIO
 import pycurl
 import requests
 from Levenshtein import distance
+from wikidata.client import Client
 
 
 # returns entire set of data from given ulan
@@ -26,7 +27,7 @@ def get_getty_artist_sex(ulan):
     for classification in classifications:
         if classification["_label"] in ["male", "female"]:
             return classification["_label"]
-    return "unknown"
+    return None
 
 
 # returns a list of ulans and their relationship to the provided ulan
@@ -134,3 +135,24 @@ def get_getty_ulan(artist):
             ulans = [accepted_ulan]
 
     return ulans
+
+
+# returns entire set of data from given wiki id
+def get_wiki_artist_data(id):
+    client = Client()
+    return client.get(id, load=True)
+
+
+# returns artist name from given wiki id
+def get_wiki_artist_name(id):
+    return get_wiki_artist_data(id).label
+
+
+def get_wiki_artist_sex(id):
+    result = get_wiki_artist_data(id)
+    for entity in result.iterlists():
+        if 'P21' == entity[0].id:
+            return entity[1][0].label
+    return None
+
+# TODO get_wiki_artist_id(artist)
