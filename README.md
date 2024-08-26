@@ -133,9 +133,6 @@ First, bump up the release version in setup.py.
 Run this command to build package:
 `python -m build`
 
-Run this if building on Windows:
-`py -m build`
-
 Run checks before releasing to PyPI:
 `twine check --strict dist/*`
 
