@@ -81,14 +81,29 @@ The dictionary is parsed from [this json file on ULAN](http://vocab.getty.edu/ul
 #### 5. get_getty_artist_sex
 
 `get_getty_artist_name` which consumes an ULAN and returns just the artist's sex as a string, available sexes are '
-male', 'female' and 'unknown'
-`get_getty_artist_name("500024301")`
-```male```
+male', 'female' and None if unknown.
+`get_getty_artist_sex("500024301")`
+
+`male`
 
 ### WikiData Functions
 #### 1. get_wiki_artist_data
+`get_wiki_artist_data` consumes a WikiData ID like `Q948598` and returns the entire data set from WikiData.
+
 #### 2. get_wiki_artist_name
+`get_wiki_artist_data` consumes a WikiData ID and returns the artist name in 'First Last' format, as seen on WikiData.
+
+`get_wiki_artist_name("Q948598")`
+
+`Albert Pinkham Ryder`
+
 #### 3. get_wiki_artist_sex
+`get_wiki_artist_sex` which consumes a WikiData ID and returns just the artist's gender and sex as a string, available sexes are '
+male', 'female' and None if unknown.
+
+`get_wiki_artist_sex("Q948598")`
+
+`male`
 
 ### Example View
 
