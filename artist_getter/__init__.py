@@ -30,6 +30,15 @@ def get_getty_artist_sex(ulan):
     return None
 
 
+# returns artist sex from given ulan
+def get_getty_artist_sex(ulan):
+    classifications = get_getty_artist_data(ulan)["classified_as"]
+    for classification in classifications:
+        if classification["_label"] in ["male", "female"]:
+            return classification["_label"]
+    return None
+
+
 # returns a list of ulans and their relationship to the provided ulan
 def get_getty_relationship(ulan):
     data = get_getty_artist_data(ulan)
@@ -152,7 +161,13 @@ def get_wiki_artist_sex(id):
     result = get_wiki_artist_data(id)
     for entity in result.iterlists():
         if 'P21' == entity[0].id:
-            return entity[1][0].label
+            return entity[1][0].label['en-gb']
     return None
 
-# TODO get_wiki_artist_id(artist)
+
+def get_wiki_artist_nationality(id):
+    result = get_wiki_artist_data(id)
+    for entity in result.iterlists():
+        if 'P27' == entity[0].id:
+            return entity[1][0].label['en-gb']
+    return None

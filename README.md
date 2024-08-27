@@ -136,4 +136,7 @@ Run this command to build package:
 Run checks before releasing to PyPI:
 `twine check --strict dist/*`
 
+Release to PYPI by:
+`twine upload --skip-existing dist/*`
+
 Push everything and create a release on GitHub.
