@@ -30,15 +30,6 @@ def get_getty_artist_sex(ulan):
     return None
 
 
-# returns artist sex from given ulan
-def get_getty_artist_sex(ulan):
-    classifications = get_getty_artist_data(ulan)["classified_as"]
-    for classification in classifications:
-        if classification["_label"] in ["male", "female"]:
-            return classification["_label"]
-    return None
-
-
 # returns a list of ulans and their relationship to the provided ulan
 def get_getty_relationship(ulan):
     data = get_getty_artist_data(ulan)
@@ -146,28 +137,33 @@ def get_getty_ulan(artist):
     return ulans
 
 
-# returns entire set of data from given wiki id
-def get_wiki_artist_data(id):
+def __get_wiki_entity(id):
     client = Client()
     return client.get(id, load=True)
 
+# returns entire set of data from given wiki id
+def get_wiki_artist_data(id):
+    return __get_wiki_entity(id)
+
 
 # returns artist name from given wiki id
-def get_wiki_artist_name(id):
+def get_wiki_artist_name(id) -> str:
     return get_wiki_artist_data(id).label
 
 
-def get_wiki_artist_sex(id):
-    result = get_wiki_artist_data(id)
-    for entity in result.iterlists():
-        if 'P21' == entity[0].id:
-            return entity[1][0].label['en-gb']
-    return None
+def get_wiki_artist_sex(id) -> str:
+    artist = get_wiki_artist_data(id)
+    P21_entity = __get_wiki_entity('P21') # 'sex or gender'
+    try:
+        return artist.get(P21_entity).label.texts['en-gb']
+    except Exception:
+        return None
 
 
-def get_wiki_artist_nationality(id):
-    result = get_wiki_artist_data(id)
-    for entity in result.iterlists():
-        if 'P27' == entity[0].id:
-            return entity[1][0].label['en-gb']
-    return None
+def get_wiki_artist_nationality(id) -> str:
+    artist = get_wiki_artist_data(id)
+    P27_entity = __get_wiki_entity('P27') # 'country of citizenship'
+    try:
+        return artist.get(P27_entity).label.texts['en']
+    except Exception:
+        return None

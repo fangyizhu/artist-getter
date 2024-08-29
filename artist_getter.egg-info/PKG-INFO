@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: artist_getter
-Version: 0.4.1
+Version: 0.4.2
 Summary: Getty ULAN and WikiData scraping utilities for artists
 Home-page: https://github.com/fangyizhu/artist-getter
 Author: Jay Mollica, Fangyi Zhu
