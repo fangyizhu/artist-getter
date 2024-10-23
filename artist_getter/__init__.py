@@ -148,7 +148,7 @@ def get_wiki_artist_data(id):
 
 # returns artist name from given wiki id
 def get_wiki_artist_name(id) -> str:
-    return get_wiki_artist_data(id).label
+    return get_wiki_artist_data(id).label.texts['en']
 
 
 def get_wiki_artist_sex(id) -> str:
