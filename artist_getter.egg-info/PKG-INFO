@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: artist_getter
-Version: 0.4.3
+Version: 0.4.4
 Summary: Getty ULAN and WikiData scraping utilities for artists
 Home-page: https://github.com/fangyizhu/artist-getter
 Author: Jay Mollica, Fangyi Zhu
@@ -47,7 +47,7 @@ Right now there are four basic functions.
 
 #### 1. get_getty_ulan
 
-`get_getty_ulan` which consumes and artist's name (formatted    `u'Last, First'`) and does a best guess match against
+`get_getty_ulan` consumes and artist's name (formatted    `u'Last, First'`) and does a best guess match against
 similar names in the Getty ULAN vocabulary. The returned data will include the name of the artist or organization, the
 ULAN, the "type" og thing returned (e.g. person, organization etc) and a scope note, which is a brief summary of the
 artist's career.
@@ -60,7 +60,7 @@ artist's career.
 
 #### 2. get_getty_relationship
 
-`get_getty_relationship` which consumes an artist's ULAN and returns a list of the relationships that artist had with
+`get_getty_relationship` consumes an artist's ULAN and returns a list of the relationships that artist had with
 other artists in the ULAN vocabulary. The `object_ulan` being the ULAN of the related person or organization.
 `get_getty_relationship("500024301")`
 
@@ -70,13 +70,13 @@ other artists in the ULAN vocabulary. The `object_ulan` being the ULAN of the re
 
 #### 3. get_getty_artist_name
 
-`get_getty_artist_name` which consumes an ULAN and returns just the artist's name formatted `Last, First`.
+`get_getty_artist_name` consumes an ULAN and returns just the artist's name formatted `Last, First`.
 `get_getty_artist_name("500024301")`
 ```Stieglitz, Alfred```
 
 #### 4. get_getty_artist_data
 
-`get_getty_artist_data` which consumes an ULAN and returns entire set of data from given ulan as a dictionary.
+`get_getty_artist_data` consumes an ULAN and returns entire set of data from given ulan as a dictionary.
 `get_getty_artist_data("500024301")`
 
 ```
@@ -98,11 +98,20 @@ The dictionary is parsed from [this json file on ULAN](http://vocab.getty.edu/ul
 
 #### 5. get_getty_artist_sex
 
-`get_getty_artist_name` which consumes an ULAN and returns just the artist's sex as a string, available sexes are '
+`get_getty_artist_name` consumes an ULAN and returns just the artist's sex as a string, available sexes are '
 male', 'female' and None if unknown.
 `get_getty_artist_sex("500024301")`
 
 `male`
+
+#### 6. get_getty_artist_birth_year
+
+`get_getty_artist_birth_year` consumes an ULAN and returns artist birth year as an integer
+
+`get_getty_artist_birth_year("500024301")`
+
+`1864`
+
 
 ### WikiData Functions
 #### 1. get_wiki_artist_data
@@ -116,12 +125,19 @@ male', 'female' and None if unknown.
 `Albert Pinkham Ryder`
 
 #### 3. get_wiki_artist_sex
-`get_wiki_artist_sex` which consumes a WikiData ID and returns just the artist's gender and sex as a string, available sexes are '
+`get_wiki_artist_sex` consumes a WikiData ID and returns just the artist's gender and sex as a string, available sexes are '
 male', 'female' and None if unknown.
 
 `get_wiki_artist_sex("Q948598")`
 
 `male`
+
+#### 4. get_wiki_artist_birth_year
+`get_wiki_artist_birth_year` consumes a WikiData ID and returns just the artist's birth year as an integer.
+
+`get_wiki_artist_birth_year("Q948598")`
+
+`1864`
 
 ### Example View
 
@@ -158,3 +174,9 @@ Release to PYPI by:
 `twine upload --skip-existing dist/*`
 
 Push everything and create a release on GitHub.
+
+#### Test unreleased package locally
+`pip uninstall artist-getter`
+
+Change to the dist directory and install the newest distribution by calling:
+`pip install artist_getter-$NEWEST_EDITION`

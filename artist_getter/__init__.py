@@ -6,6 +6,7 @@ import pycurl
 import requests
 from Levenshtein import distance
 from wikidata.client import Client
+from functools import cache
 
 
 # returns entire set of data from given ulan
@@ -17,11 +18,13 @@ def get_getty_artist_data(ulan):
 
 
 # returns artist name from given ulan
+@cache
 def get_getty_artist_name(ulan):
     return get_getty_artist_data(ulan)['_label']
 
 
 # returns artist sex from given ulan
+@cache
 def get_getty_artist_sex(ulan):
     classifications = get_getty_artist_data(ulan)["classified_as"]
     for classification in classifications:
@@ -29,8 +32,14 @@ def get_getty_artist_sex(ulan):
             return classification["_label"]
     return None
 
+# returns artist birth year given ulan
+@cache
+def get_getty_artist_birth_year(ulan):
+    timespan = get_getty_artist_data(ulan)["born"]["timespan"]["begin_of_the_begin"][:4]
+    return int(timespan)
 
 # returns a list of ulans and their relationship to the provided ulan
+@cache
 def get_getty_relationship(ulan):
     data = get_getty_artist_data(ulan)
     relationships = list()
@@ -50,6 +59,7 @@ def get_getty_relationship(ulan):
 
 
 # returns a best guess ulan based on artist's name (formatted: Lastname, Firstname) and some basic info
+@cache
 def get_getty_ulan(artist):
     # artists with apostrophies in their names need escaping
     if (artist.find("'") != -1):
@@ -142,15 +152,18 @@ def __get_wiki_entity(id):
     return client.get(id, load=True)
 
 # returns entire set of data from given wiki id
+@cache
 def get_wiki_artist_data(id):
     return __get_wiki_entity(id)
 
 
 # returns artist name from given wiki id
+@cache
 def get_wiki_artist_name(id) -> str:
     return get_wiki_artist_data(id).label.texts['en']
 
 
+@cache
 def get_wiki_artist_sex(id) -> str:
     artist = get_wiki_artist_data(id)
     P21_entity = __get_wiki_entity('P21') # 'sex or gender'
@@ -160,6 +173,17 @@ def get_wiki_artist_sex(id) -> str:
         return None
 
 
+@cache
+def get_wiki_artist_birth_year(id) -> str:
+    artist = get_wiki_artist_data(id)
+    P569_entity = __get_wiki_entity('P569') # 'date of birth'
+    try:
+        return artist.get(P569_entity).year
+    except Exception:
+        return None
+
+
+@cache
 def get_wiki_artist_nationality(id) -> str:
     artist = get_wiki_artist_data(id)
     P27_entity = __get_wiki_entity('P27') # 'country of citizenship'
